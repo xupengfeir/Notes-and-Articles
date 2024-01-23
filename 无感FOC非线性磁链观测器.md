@@ -133,28 +133,8 @@ eta(x_2)
 
 模型离散化：
 
-$$\begin{bmatrix}\hat{x}_{1k} \\
-\hat{x}_{2k}\end{bmatrix}=T_s\begin{bmatrix}\begin{bmatrix}y_{1(k-1)} \\
-y_{2(k-1)}\end{bmatrix}+\frac{\gamma}{2}\begin{bmatrix}eta(x_1)_{k-1} \\
-eta(x_2)_{k-1}\end{bmatrix}(\psi^2_m-\Vert eta(x)\Vert^2)\end{bmatrix}+\begin{bmatrix}\hat{x}_{1(k-1)} \\
-\hat{x}_{2(k-1)}\end{bmatrix}$$
+![image](https://github.com/xupengfeir/Notes-and-Articles/assets/154572489/aba40a26-9935-4a2a-ae2d-c9716d07d9b2)
 
-
-$$\begin{bmatrix}
-cos\hat{\theta} \\
-sin\hat{\theta}
-\end{bmatrix}
-=\frac{1}{\psi_m}
-\left (
-\begin{bmatrix}
-\hat{x}_{1k} \\
-\hat{x}_{2k}
-\end{bmatrix}
--L\begin{bmatrix}
-i_{\alpha} \\
-i_{\beta}
-\end{bmatrix}
-\right )$$
 
 
 ### 基于反电动势的PLL：
