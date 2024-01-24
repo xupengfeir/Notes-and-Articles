@@ -24,14 +24,21 @@ $$G_{(s)}=\frac{Y_{(s)}}{U_{(s)}}=\frac{1}{ms^2+bs+k}$$
 选择状态变量 $z_1(t)$ ,$z_2(t)$
 
 $$z_1(t)=x_{(t)}，z_2(t)=\frac{dz_1(t)}{dt}=\frac{dx(t)}{dt}$$
+
 $$m\frac{dz_2(t)}{dt}+bz_2(t)+kz_1(t)=f(t)\Rightarrow \frac{dz_2(t)}{dt}=\frac{1}{m} \left (f(t)-bz_2(t)-kz_1(t)\right )$$
-$$\frac{d}{dt} \begin{bmatrix} z_1(t) \\ z_2(t) \end{bmatrix}=
-\begin{bmatrix} 0 & 1 \\ -\frac{k}{m} & -\frac{b}{m} \end{bmatrix}
-\begin{bmatrix} z_1(t) \\ z_2(t) \end{bmatrix}+\begin{bmatrix} 0 \\ \frac{1}{m} \end{bmatrix}u(t)$$
+
+$$\frac{d}{dt} \begin{bmatrix} z_1(t) \\
+z_2(t) \end{bmatrix}=
+\begin{bmatrix} 0 & 1 \\
+-\frac{k}{m} & -\frac{b}{m} \end{bmatrix}
+\begin{bmatrix} z_1(t) \\
+z_2(t) \end{bmatrix}+\begin{bmatrix} 0 \\
+\frac{1}{m} \end{bmatrix}u(t)$$
 
 得到 $\Rightarrow$
 
-$$y_{(t)}=\begin{bmatrix} 1 & 0 \end{bmatrix}\begin{bmatrix} z_1(t) \\ z_2(t) \end{bmatrix}+\begin{bmatrix} 0 \end{bmatrix}\begin{bmatrix} u_{(t)} \end{bmatrix}$$
+$$y_{(t)}=\begin{bmatrix} 1 & 0 \end{bmatrix}\begin{bmatrix} z_1(t) \\
+z_2(t) \end{bmatrix}+\begin{bmatrix} 0 \end{bmatrix}\begin{bmatrix} u_{(t)} \end{bmatrix}$$
 
 将上述形式推广并得到状态空间方程的一般形式：
 
@@ -53,7 +60,7 @@ $x(t)$ 是状态变量，是一个p维向量， $x(t)=\left [ x_1(t),x_2(t),\cdo
 
 在线性代数中，对于给定的一个方阵A，它的特征向量v经过矩阵A线性变换的作用后，得到的新向量仍然与原来的v保持在同一条直线上，但其长度和方向也许会发生改变。即
 $$Av=\lambda v$$
-其中$\lambda$为标量，即特征向量的长度在矩阵A线性变换下缩放的比例，称为矩阵A的特征值。有两个例子如下图中所示，可知$v_b$是矩阵A的特征向量，$\lambda$是其特征值。
+其中  $\lambda$  为标量，即特征向量的长度在矩阵A线性变换下缩放的比例，称为矩阵A的特征值。有两个例子如下图中所示，可知  $v_b$  是矩阵A的特征向量，  $\lambda$ 是其特征值。
 
 ![20240123173835](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240123173835.png)
 
@@ -64,17 +71,24 @@ $$\left ( A-\lambda I\right )v=0$$
 其中，I为单位矩阵，维度与A相同，如果式有非零解，则矩阵    $A-\lambda I$   的行列式必须为0，则 $\left | A-\lambda I \right |=0$ ，
 将 
 
-$$A=\begin{bmatrix} 1 & 1 \\ 4 & -2 \end{bmatrix} \Rightarrow A_1=\begin{bmatrix} 1 \\ 4 \end{bmatrix},A_2=\begin{bmatrix} 1 \\ -2 \end{bmatrix}$$
+$$A=\begin{bmatrix} 1 & 1 \\
+4 & -2 \end{bmatrix} \Rightarrow A_1=\begin{bmatrix} 1 \\
+4 \end{bmatrix},A_2=\begin{bmatrix} 1 \\
+-2 \end{bmatrix}$$
 
 代入可得  $\lambda^2+\lambda-6=0$  ,称为矩阵A的特征方程，可以得到
 
 矩阵A的两个特征值：  $\lambda_1=2,\lambda_2=-3$ ，求得特征向量
 
-$$v_1=\begin{bmatrix} 1 \\ 1 \end{bmatrix},v_2=\begin{bmatrix} 0.5 \\ -2 \end{bmatrix}$$
+$$v_1=\begin{bmatrix} 1 \\
+1 \end{bmatrix},v_2=\begin{bmatrix} 0.5 \\
+-2 \end{bmatrix}$$
 
 得新的向量
 
-$$Av_1=\begin{bmatrix} 2 \\ 2 \end{bmatrix},Av_2=\begin{bmatrix} -1.5 \\ 6 \end{bmatrix}$$
+$$Av_1=\begin{bmatrix} 2 \\
+2 \end{bmatrix},Av_2=\begin{bmatrix} -1.5 \\
+6 \end{bmatrix}$$
 
 ![20240123174759](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240123174759.png)
 
@@ -132,8 +146,10 @@ $L$是观测矩阵，影响系统是否收敛及收敛速度。由以下框图�
 $$\frac{de}{dt}=\frac{d\left( z(t)-\hat{z}(t) \right)}{dt}=Az(t)+Bu(t)-(A-LC)\hat{z}(t)-(B-LD)u(t)-Ly(t)=(A-LC)(z(t)-\hat{z}(t))=(A-LC)e(t)$$
 
 解上述一阶微分方程得： $e(t)=C_0e^{(A-LC)t},t\ge0$
-上述表明，为了使观测状态 $\frac{dz(t)}{dt}$趋近于实际的 $z(t)$，也就是误差e趋近于0，则状态误差方程应收敛。
+上述表明，为了使观测状态  $\frac{dz(t)}{dt}$趋近于实际的 $z(t)$，也就是误差e趋近于0，则状态误差方程应收敛。
+
 $$\frac{de(t)}{dt}=(A-LC)e(t)$$
+
 状态矩阵 $(A-LC)$的特征值应具有负实部，且负实部的大小会影响状态逼近的速度，特征值负实部绝对值越大，逼近速度越快。
 
 在旋转坐标系下，电机dq轴方程
@@ -141,11 +157,19 @@ $$u_d=Ri_d+L_d\frac{di_d}{dt}-w_eL_qi_q$$
 $$u_q=Ri_q+L_q\frac{di_q}{dt}+w_e(L_di_d+\psi_f)$$
 改写以上方程，将对角元素变成对称形式
 
-$$\begin{bmatrix} u_d \\ u_q \end{bmatrix}=\begin{bmatrix} R+\frac{d}{dt}L_d & -w_eL_q \\ w_eL_q & R+\frac{d}{dt}L_d \end{bmatrix}\begin{bmatrix} i_d \\ i_q \end{bmatrix}+\begin{bmatrix} 0 \\ (L_d-L_q)(w_ei_d-\frac{di_q}{dt})+w_e\psi_f \end{bmatrix}$$
+$$\begin{bmatrix} u_d \\
+u_q \end{bmatrix}=\begin{bmatrix} R+\frac{d}{dt}L_d & -w_eL_q \\
+w_eL_q & R+\frac{d}{dt}L_d \end{bmatrix}\begin{bmatrix} i_d \\
+i_q \end{bmatrix}+\begin{bmatrix} 0 \\
+(L_d-L_q)(w_ei_d-\frac{di_q}{dt})+w_e\psi_f \end{bmatrix}$$
 
 旋转坐标系下方程通过反PARK变换得到静止坐标系下电机方程
 
-$$\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}=\begin{bmatrix} R+\frac{d}{dt}L_d & w_e(L_d-L_q) \\ -w_e(L_d-L_q) & R+\frac{d}{dt}L_d \end{bmatrix}\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}+\begin{bmatrix} (L_d-L_q)(w_ei_d-\frac{di_q}{dt})+w_e\psi_f \end{bmatrix}\begin{bmatrix} -sin\theta_e \\ cos\theta_e \end{bmatrix}$$
+$$\begin{bmatrix} u_{\alpha} \\
+u_{\beta} \end{bmatrix}=\begin{bmatrix} R+\frac{d}{dt}L_d & w_e(L_d-L_q) \\
+-w_e(L_d-L_q) & R+\frac{d}{dt}L_d \end{bmatrix}\begin{bmatrix} i_{\alpha} \\
+i_{\beta} \end{bmatrix}+\begin{bmatrix} (L_d-L_q)(w_ei_d-\frac{di_q}{dt})+w_e\psi_f \end{bmatrix}\begin{bmatrix} -sin\theta_e \\
+cos\theta_e \end{bmatrix}$$
 
 静止坐标系下，电机的等效模型如下所示
 
@@ -153,46 +177,145 @@ $$\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}=\begin{bmatrix} R+\frac{
 
 得扩展反电势（EMF）： 
 
-$$\begin{bmatrix} e_{\alpha} \\ e_{\beta} \end{bmatrix}=\begin{bmatrix} (L_d-L_q)(w_ei_d-\frac{di_q}{dt})+w_e\psi_f \end{bmatrix}\begin{bmatrix} -sin\theta_e \\ cos\theta_e \end{bmatrix}$$
+$$\begin{bmatrix} e_{\alpha} \\
+e_{\beta} \end{bmatrix}=\begin{bmatrix} (L_d-L_q)(w_ei_d-\frac{di_q}{dt})+w_e\psi_f \end{bmatrix}\begin{bmatrix} -sin\theta_e \\
+cos\theta_e \end{bmatrix}$$
 
 将以上静止坐标系下电机电压方程改写成电流的状态方程
 
-$$\frac{d}{dt}\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}=\frac{1}{L_d}\begin{bmatrix} -R & -(L_d-L_q)w_e \\ (L_d-L_q)w_e & -R\end{bmatrix}\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}+\frac{1}{L_d}\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}-\frac{1}{L_d}\begin{bmatrix} e_{\alpha} \\ e_{\beta} \end{bmatrix}$$
+$$\frac{d}{dt}\begin{bmatrix} i_{\alpha} \\
+i_{\beta} \end{bmatrix}=\frac{1}{L_d}\begin{bmatrix} -R & -(L_d-L_q)w_e \\
+(L_d-L_q)w_e & -R\end{bmatrix}\begin{bmatrix} i_{\alpha} \\
+i_{\beta} \end{bmatrix}+\frac{1}{L_d}\begin{bmatrix} u_{\alpha} \\
+u_{\beta} \end{bmatrix}-\frac{1}{L_d}\begin{bmatrix} e_{\alpha} \\
+e_{\beta} \end{bmatrix}$$
 
 对于表贴式三相PMSM，重写静止坐标系下的电流方程
 $$\frac{d}{dt}i_{s}=Ai_s+Bu_s+K_eE_s$$
 
- $\Rightarrow K_e=\begin{bmatrix} -\frac{1}{L_s} & 0 \\ 0 & -\frac{1}{L_s} \end{bmatrix}$  为反电动势系数
-$$\Rightarrow E_s=\begin{bmatrix} e_{\alpha} \\ e_{\beta} \end{bmatrix}=\begin{bmatrix} -\psi_fw_esin\theta_e \\ \psi_fw_ecos\theta_e \end{bmatrix},\dot{E_s}=\frac{d}{dt}\begin{bmatrix} -\psi_fw_esin\theta_e \\ \psi_fw_ecos\theta_e \end{bmatrix}=w_e\begin{bmatrix} -e_{\beta} \\ e_{\alpha} \end{bmatrix}$$
+ $$\Rightarrow K_e=\begin{bmatrix} -\frac{1}{L_s} & 0 \\
+ 0 & -\frac{1}{L_s} \end{bmatrix}$$
+ 
+ 为反电动势系数
+ 
+$$\Rightarrow E_s=\begin{bmatrix} e_{\alpha} \\
+e_{\beta} \end{bmatrix}=\begin{bmatrix} -\psi_fw_esin\theta_e \\
+\psi_fw_ecos\theta_e \end{bmatrix},\dot{E_s}=\frac{d}{dt}\begin{bmatrix} -\psi_fw_esin\theta_e \\
+\psi_fw_ecos\theta_e \end{bmatrix}=w_e\begin{bmatrix} -e_{\beta} \\
+e_{\alpha} \end{bmatrix}$$
 
-$$\Rightarrow \frac{d}{dt}\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}=\begin{bmatrix} -\frac{R}{L_s} & 0 \\ 0 & -\frac{R}{L_s} \end{bmatrix}\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}+\begin{bmatrix} \frac{1}{L_s} & 0 \\ 0 & \frac{1}{L_s} \end{bmatrix}\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}+\begin{bmatrix} -\frac{1}{L_s}&0 \\ 0&-\frac{1}{L_s} \end{bmatrix}\begin{bmatrix} e_{\alpha} \\ e_{\beta} \end{bmatrix}$$
+$$\Rightarrow \frac{d}{dt}\begin{bmatrix} i_{\alpha} \\
+i_{\beta} \end{bmatrix}=\begin{bmatrix} -\frac{R}{L_s} & 0 \\
+0 & -\frac{R}{L_s} \end{bmatrix}\begin{bmatrix} i_{\alpha} \\
+i_{\beta} \end{bmatrix}+\begin{bmatrix} \frac{1}{L_s} & 0 \\
+0 & \frac{1}{L_s} \end{bmatrix}\begin{bmatrix} u_{\alpha} \\
+u_{\beta} \end{bmatrix}+\begin{bmatrix} -\frac{1}{L_s}&0 \\
+0&-\frac{1}{L_s} \end{bmatrix}\begin{bmatrix} e_{\alpha} \\
+e_{\beta} \end{bmatrix}$$
 
 ![20240123212422](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240123212422.png)
 
-$u_{\alpha},u_{\beta},i_{\alpha},i_{\beta}$ 是已知量，因此可计算出反电动势 $e_{\alpha},e_{\beta}$，反电动势含有电机的转速信息。
+$u_{\alpha}$ ,  $u_{\beta}$ , $i_{\alpha}$ , $i_{\beta}$  是已知量，因此可计算出反电动势  $e_{\alpha}$ , $e_{\beta}$，反电动势含有电机的转速信息。
+
 根据上述框图，建立状态观测方程：
 
 $$u(t)=[u_{\alpha}\quad u_{\beta}]^T$$
+
 $$z(t)=[i_{\alpha}\quad i_{\beta} \quad e_{\alpha}\quad e_{\beta}]^T$$
+
 $$\frac{dz(t)}{dt}=\begin{bmatrix} \frac{d}{dt}i_{\alpha}\quad \frac{d}{dt}i_{\beta}\quad \frac{d}{dt}e_{\alpha}\quad \frac{d}{dt}e_{\beta} \end{bmatrix}^T$$
+
 $$y(t)=[i_{\alpha}\quad i_{\beta}]^T$$
+
 得到
- $$\frac{dz(t)}{dt}=Az(t)+Bu(t) \\ y(t)=Cz(t)$$
+
+ $$\frac{dz(t)}{dt}=Az(t)+Bu(t) \\
+ y(t)=Cz(t)$$
+ 
 其中，
-$$A=\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\ 0 & -\frac{R}{L_s} & 0 & -\frac{1}{L_s} \\ 0 & 0 & 0 & -w_e \\ 0 & 0 & w_e & 0 \end{bmatrix},B=\begin{bmatrix} \frac{1}{L_s} & 0 \\ 0 & \frac{1}{L_s} \\ 0 & 0 \\ 0 & 0 \end{bmatrix},C=\begin{bmatrix} 1 & 0& 0& 0 \\ 0 & 1 &0 &0 \end{bmatrix}$$
+
+
+$$A=\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\
+0 & -\frac{R}{L_s} & 0 & -\frac{1}{L_s} \\
+0 & 0 & 0 & -w_e \\
+0 & 0 & w_e & 0 \end{bmatrix},B=\begin{bmatrix} \frac{1}{L_s} & 0 \\
+0 & \frac{1}{L_s} \\
+0 & 0 \\ 0 & 0 \end{bmatrix},C=\begin{bmatrix} 1 & 0& 0& 0 \\
+0 & 1 &0 &0 \end{bmatrix}$$
+
 判断系统是否稳定，可以从状态矩阵A的特征值入手,根据闭环状态观测器框图引入状态观测器，得
+
 $$\frac{d\hat{z}(t)}{dt}=A\hat{z}(t)+Bu(t)+L(y(t)-\hat{y}(t))=A\hat{z}(t)+Bu(t)+LC(z(t)-\hat{z}(t))$$
-$$L=\begin{bmatrix} L_1 & 0 & L_2 & 0 \\ 0 & L_1 & 0 & L_2 \end{bmatrix}^T$$
+
+$$L=\begin{bmatrix} L_1 & 0 & L_2 & 0 \\
+0 & L_1 & 0 & L_2 \end{bmatrix}^T$$
+
 $\Rightarrow$ 真实系统
-$$\begin{bmatrix} \frac{d}{dt}i_{\alpha} \\ \frac{d}{dt}i_{\beta}\\ \frac{d}{dt}e_{\alpha}\\ \frac{d}{dt}e_{\beta} \end{bmatrix}=\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\ 0 & -\frac{R}{L_s} & 0 & -\frac{1}{L_s} \\ 0 & 0 & 0 & -w_e \\ 0 & 0 & w_e & 0 \end{bmatrix}\begin{bmatrix}i_{\alpha}\\ i_{\beta} \\ e_{\alpha}\\ e_{\beta}\end{bmatrix}+\begin{bmatrix} \frac{1}{L_s} & 0 \\ 0 & \frac{1}{L_s} \\ 0 & 0 \\ 0 & 0 \end{bmatrix}\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix},\begin{bmatrix} i_{\alpha} \\ i_{\beta} \end{bmatrix}=\begin{bmatrix} 1 & 0& 0& 0 \\ 0 & 1 &0 &0 \end{bmatrix}\begin{bmatrix}i_{\alpha}\\ i_{\beta} \\ e_{\alpha}\\ e_{\beta}\end{bmatrix}$$
+
+$$\begin{bmatrix} \frac{d}{dt}i_{\alpha} \\
+\frac{d}{dt}i_{\beta}\\
+\frac{d}{dt}e_{\alpha}\\
+\frac{d}{dt}e_{\beta} \end{bmatrix}=\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\
+0 & -\frac{R}{L_s} & 0 & -\frac{1}{L_s} \\
+0 & 0 & 0 & -w_e \\
+0 & 0 & w_e & 0 \end{bmatrix}\begin{bmatrix}i_{\alpha}\\
+i_{\beta} \\
+e_{\alpha}\\
+e_{\beta}\end{bmatrix}+\begin{bmatrix} \frac{1}{L_s} & 0 \\
+0 & \frac{1}{L_s} \\
+0 & 0 \\
+0 & 0 \end{bmatrix}\begin{bmatrix} u_{\alpha} \\
+u_{\beta} \end{bmatrix},\begin{bmatrix} i_{\alpha} \\
+i_{\beta} \end{bmatrix}=\begin{bmatrix} 1 & 0& 0& 0 \\
+0 & 1 &0 &0 \end{bmatrix}\begin{bmatrix}i_{\alpha}\\
+i_{\beta} \\
+e_{\alpha} \\
+e_{\beta}\end{bmatrix}$$
+
 $\Rightarrow$ 估计系统（全阶观测器）
-$$\begin{bmatrix} \frac{d}{dt}\hat{i}_{\alpha} \\ \frac{d}{dt}\hat{i}_{\beta}\\ \frac{d}{dt}\hat{e}_{\alpha}\\ \frac{d}{dt}\hat{e}_{\beta} \end{bmatrix}=\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\ 0 & -\frac{R}{L_s} & 0 & -\frac{1}{L_s} \\ 0 & 0 & 0 & -w_e \\ 0 & 0 & w_e & 0 \end{bmatrix}\begin{bmatrix}\hat{i}_{\alpha}\\ \hat{i}_{\beta} \\ \hat{e}_{\alpha}\\ \hat{e}_{\beta}\end{bmatrix}+\begin{bmatrix} \frac{1}{L_s} & 0 \\ 0 & \frac{1}{L_s} \\ 0 & 0 \\ 0 & 0 \end{bmatrix}\begin{bmatrix} u_{\alpha} \\ u_{\beta} \end{bmatrix}+\begin{bmatrix} L_1 & 0 \\ 0 & L_1 \\ L_2 & 0 \\ 0 & L_2 \end{bmatrix}\begin{bmatrix} 1 & 0& 0& 0 \\ 0 & 1 &0 &0 \end{bmatrix}\begin{bmatrix}i_{\alpha}-\hat{i_{\alpha}} \\ i_{\beta}-\hat{i_{\beta}} \\ e_{\alpha}-\hat{e_{\alpha}}\\ e_{\beta}-\hat{e}_{\beta}\end{bmatrix}$$
+<!-- $$\begin{bmatrix} \frac{d}{dt}\hat{i}_{\alpha} \\
+\frac{d}{dt}\hat{i}_{\beta} \\
+\frac{d}{dt}\hat{e}_{\alpha} \\ 
+\frac{d}{dt}\hat{e}_{\beta} \end{bmatrix}=
+\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\
+0 & -\frac{R}{L_s} & 0 & -\frac{1}{L_s} \\
+0 & 0 & 0 & -w_e \\
+0 & 0 & w_e & 0 \end{bmatrix}\begin{bmatrix}\hat{i}_{\alpha}\\
+\hat{i}_{\beta} \\
+\hat{e}_{\alpha} \\
+\hat{e}_{\beta}\end{bmatrix}+\begin{bmatrix} \frac{1}{L_s} & 0 \\
+0 & \frac{1}{L_s} \\
+0 & 0 \\
+0 & 0 \end{bmatrix}\begin{bmatrix} u_{\alpha} \\
+u_{\beta} \end{bmatrix}+\begin{bmatrix} L_1 & 0 \\
+0 & L_1 \\
+L_2 & 0 \\
+0 & L_2 \end{bmatrix}\begin{bmatrix} 1 & 0& 0& 0 \\
+0 & 1 &0 &0 \end{bmatrix}\begin{bmatrix}i_{\alpha}-\hat{i_{\alpha}} \\
+i_{\beta}-\hat{i_{\beta}} \\
+e_{\alpha}-\hat{e_{\alpha}} \\
+e_{\beta}-\hat{e}_{\beta}\end{bmatrix}$$ -->
+
+![image](https://github.com/xupengfeir/Notes-and-Articles/assets/154572489/bb93e090-e0a6-4a4a-9ba8-39fd6a87e75c)
+
+
 由前面可知，有状态误差方程
+
 $$\frac{de(t)}{dt}=(A-LC)e(t)$$
+
 得到状态误差矩阵特征方程
-$$A-LC=\begin{bmatrix} -\frac{R_s}{L_s}-l_1 & 0 & -\frac{1}{L_s} & 0 \\ 0 & -\frac{R_s}{L_s}-l_1 & 0 & -\frac{1}L_{s} \\ -l_2 & 0 & 0 & -w_e \\ 0 & -l_2 & w_e & 0 \end{bmatrix}$$
-$$\lambda I-(A-LC)=\begin{bmatrix} \lambda+\frac{R_s}{L_s}+l_1 & 0 & \frac{1}{L_s} & 0 \\ 0 & \lambda+\frac{R_s}{L_s}+l_1 & 0 & \frac{1}L_{s} \\ l_2 & 0 & \lambda & w_e \\ 0 & l_2 & -w_e & \lambda \end{bmatrix}$$
-令 $|\lambda I-(A-LC)|=0$,当且仅当 $\lambda<0$时，系统收敛稳定。
+
+$$A-LC=\begin{bmatrix} -\frac{R_s}{L_s}-l_1 & 0 & -\frac{1}{L_s} & 0 \\
+0 & -\frac{R_s}{L_s}-l_1 & 0 & -\frac{1}L_{s} \\
+-l_2 & 0 & 0 & -w_e \\
+0 & -l_2 & w_e & 0 \end{bmatrix}$$
+
+$$\lambda I-(A-LC)=\begin{bmatrix} \lambda+\frac{R_s}{L_s}+l_1 & 0 & \frac{1}{L_s} & 0 \\
+0 & \lambda+\frac{R_s}{L_s}+l_1 & 0 & \frac{1}L_{s} \\
+l_2 & 0 & \lambda & w_e \\
+0 & l_2 & -w_e & \lambda \end{bmatrix}$$
+
+令   $|\lambda I-(A-LC)|=0$,当且仅当 $\lambda<0$时，系统收敛稳定。
 
 ## 前向欧拉法离散：
 $\frac{dx}{dt}=\frac{x(k+1)-x(k)}{T}$ ,T为采样周期， $\frac{dx}{dt}$为上一时刻的微分。
@@ -200,6 +323,7 @@ $\frac{dx}{dt}=\frac{x(k+1)-x(k)}{T}$ ,T为采样周期， $\frac{dx}{dt}$为上
 ![20240123222024](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240123222024.png)
 
 对观测器离散：
+
 $$\frac{d\hat{z}(t)}{dt}=A\hat{z}(t)+Bu(t)+L(y(t)-\hat{y}(t)) \Rightarrow \hat{z}(k+1)=(AT+I)\hat{z}(k)+BTu(k)+LT(y(k)-\hat{y}(k))$$
 
 ![20240123222400](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240123222400.png)
@@ -212,21 +336,22 @@ $$\frac{d\hat{z}(t)}{dt}=A\hat{z}(t)+Bu(t)+L(y(t)-\hat{y}(t)) \Rightarrow \hat{z
 
 方程组一：
 
-$$\hat{i}_{\alpha(k+1)}=(1-\frac{R_s}{L_s}T-L_1T)\hat{i}_{\alpha(k)}-\frac{1}{L_s}T\hat{e}_{\alpha(k)}+\frac{1}{L_s}Tu_{\alpha(k)}+L_1Ti_{\alpha(k)}$$
+<!-- $$\hat{i}_{\alpha(k+1)}=(1-\frac{R_s}{L_s}T-L_1T)\hat{i}_{\alpha(k)}-\frac{1}{L_s}T\hat{e}_{\alpha(k)}+\frac{1}{L_s}Tu_{\alpha(k)}+L_1Ti_{\alpha(k)}$$
 
-$$\hat{e}_{\alpha(k+1)}=\hat{e}_{\alpha(k)}+L_2T(i_{\alpha(k)}-\hat{i}_{\alpha(k)})$$
+$$\hat{e}_{\alpha(k+1)}=\hat{e}_{\alpha(k)}+L_2T(i_{\alpha(k)}-\hat{i}_{\alpha(k)})$$ -->
+![image](https://github.com/xupengfeir/Notes-and-Articles/assets/154572489/96238f2f-864c-4673-b85f-d9ced179826b)
+
 
 方程组二：
-
-$$\hat{i}_{\beta(k+1)}=(1-\frac{R_s}{L_s}T-L_1T)\hat{i}_{\beta(k)}-\frac{1}{L_s}T\hat{e}_{\beta(k)}+\frac{1}{L_s}Tu_{\beta(k)}+L_1Ti_{\beta(k)}$$
-
-$$\hat{e}_{\beta(k+1)}=\hat{e}_{\beta(k)}+L_2T(i_{\beta(k)}-\hat{i}_{\beta(k)})$$
+![image](https://github.com/xupengfeir/Notes-and-Articles/assets/154572489/a3420e7c-1516-498a-8e98-d5cf93f0473c)
 
 得到观测矩阵  $A_0$:
 
-$$A_0=\begin{bmatrix} 1-\frac{R_s}{L_s}-L_1T & -\frac{1}{L_s}T \\ L_2T & 1 \end{bmatrix}$$
+$$A_0=\begin{bmatrix} 1-\frac{R_s}{L_s}-L_1T & -\frac{1}{L_s}T \\
+L_2T & 1 \end{bmatrix}$$
 
-$$|\lambda I-A_0|=\begin{vmatrix} \lambda -1+\frac{R_s}{L_s}+L_1T & \frac{1}{L_s}T \\ -L_2T & \lambda-1 \end{vmatrix}=(\lambda -1+\frac{R_s}{L_s}+L_1T)(\lambda -1)+\frac{L_2}{L_s}T^2=0$$
+$$|\lambda I-A_0|=\begin{vmatrix} \lambda -1+\frac{R_s}{L_s}+L_1T & \frac{1}{L_s}T \\
+-L_2T & \lambda-1 \end{vmatrix}=(\lambda -1+\frac{R_s}{L_s}+L_1T)(\lambda -1)+\frac{L_2}{L_s}T^2=0$$
 
 求出  $L_1,L_2$ ,当且仅当特征值   $\lambda<0$ 时，系统收敛稳定。
 
