@@ -32,7 +32,9 @@ SVPWM的理论基础是平均值等效原理，记载一个开关周内通过对
 设直流母线侧电压为Udc，逆变器输出的三相电压为UA,UB,UC，其分别加载空间上互差120°的三相平面静止坐标系上，可以定义三个电压空间矢量UA(t),UB(t),UC(t)，方向始终在各相的轴线上，而大小则随时间按正弦规律做变化，时间相位互差120°。假设Um为相电压峰值，f为电源频率。
 
 $$U_{A}(t)=U_mcos(\theta)$$
+
 $$U_{B}(t)=U_mcos(\theta-\frac{2\pi}{3})$$
+
 $$U_{C}(t)=U_mcos(\theta+\frac{2\pi}{3})$$
 
 其中 $\theta=2\pi ft$, 则三相电压矢量相加合成空间矢量 $U(t)$ 为：
@@ -47,9 +49,9 @@ $$U(t)=U_{A}(t)+U_{B}(t)e^{\frac{j2\pi}{3}}+U_C(t)e^{\frac{j4\pi}{3}}=\frac{3}{2
 
 在SVPWM中，星接点n对地的电压Ung是波动的，并不是固定的，表现为三次谐波；在SPWM中星接点n对地的电压Ung是固定的，表现为直流分量。
 
-**SVPWM：Uag=Uan+Ung，等效为：马鞍形波=正弦波+三次谐波；**
+**SVPWM：  $U_{ag}=U_{an}+U_{ng}$ ，等效为：马鞍形波=正弦波+三次谐波；**
 
-**SPWM：Uag=Uan+Ung，等效为：正弦波=正弦波+直流分量**
+**SPWM：  $U_{ag}=U_{an}+U_{ng}$ ，等效为：正弦波=正弦波+直流分量**
 
 且不管是SVPWM还是SPWM，某相的端点对地最高电压Uag、Ubg、Ucg都能到Vdc（直流母线电压）。下图（a）表示SPWM接地电压和线电压的关系，（b）表示SVPWM接地电压和线电压的关系。
 
@@ -90,22 +92,24 @@ $$U_4=\frac{2}{3}U_{dc}cos(\theta)+\frac{2}{3}U_{dc}cos(\theta-\frac{2}{3}\pi)e^
 ![20240124185800](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240124185800.png)
 
 **补充：**
-由前面合成电压矢量公式可知，相电压幅值为 $\frac{2}{3}U_{dc}$ , 可以合成矢量圆 $U_{dc}e^{j\theta}$ ,但最终实际得到的是一个边长为 $U_{dc}$ 的正六边形，可知相电压 $U_mcos(\theta)$ 中的幅值 $U_m$ 小于 $\frac{2}{3}U_{dc}$ (受中性点波动的影响)。又因为SVPWM目的是合成一个完整的电压圆，即如上图所示的内切圆，可计算出 $U_m=\frac{\sqrt{3}}{2}\frac{2}{3}U_{dc}$ , 所以 $\frac{\sqrt{3}}{3}U_{dc}$ 是等效之后的相电压幅值（去掉了中性点波动的影响），等效相电压 $U^{'}_{an}=\frac{\sqrt{3}}{3}U_{dc}cos(\theta)$, 此时线电压
+由前面合成电压矢量公式可知，相电压幅值为 $\frac{2}{3}U_{dc}$ , 可以合成矢量圆 $U_{dc}e^{j\theta}$ ,但最终实际得到的是一个边长为 $U_{dc}$ 的正六边形，可知相电压 $U_mcos(\theta)$ 中的幅值 $U_m$ 小于 $\frac{2}{3}U_{dc}$ (受中性点波动的影响)。又因为SVPWM目的是合成一个完整的电压圆，即如上图所示的内切圆，可计算出 $U_m=\frac{\sqrt{3}}{2}\frac{2}{3}U_{dc}$ , 所以 $\frac{\sqrt{3}}{3}U_{dc}$ 是等效之后的相电压幅值（去掉了中性点波动的影响），等效相电压 $U_{an}=\frac{\sqrt{3}}{3}U_{dc}cos(\theta)$, 此时线电压
 
-$$U_{ab}=U^{'}_{an}-U^{'}_{bn}=\frac{\sqrt{3}}{3}U_{dc}cos(\theta)-\frac{\sqrt{3}}{3}U_{dc}cos(\theta-\frac{2\pi}{3})=U_{dc}cos(\theta+\frac{\pi}{6})$$
+
+$$U_{ab}=U_{an}-U_{bn}=\frac{\sqrt{3}}{3}U_{dc}cos(\theta)-\frac{\sqrt{3}}{3}U_{dc}cos(\theta-\frac{2\pi}{3})=U_{dc}cos(\theta+\frac{\pi}{6})$$
+
 
 运算结果解释了为什么SVPWM调制线电压是 $U_{dc}$ , 直流母线利用率为1。
 
-总结：最大不失真电压幅值 $\frac{\sqrt{3}}{2}U_{dc}$ ，合成矢量电压 $|U_4|=U_{dc}$，线电压 $U_{ab}=U_{dc}cos(\theta+\frac{\pi}{6})$ ，等效相电 压 $U_{an}=\frac{\sqrt{3}}{3}U_{dc}cos(\theta)$ ，实际相电压 $U_{an}=\frac{2}{3}U_{dc}cos(\theta)$  或 $U_{an}=\frac{1}{3}U_{dc}cos(\theta)$  （未考虑方向）。
+总结：最大不失真电压幅值 $\frac{\sqrt{3}}{2}U_{dc}$ ，合成矢量电压  $|U_4|=U_{dc}$  ，线电压 $U_{ab}=U_{dc}cos(\theta+\frac{\pi}{6})$ ，等效相电 压 $U_{an}=\frac{\sqrt{3}}{3}U_{dc}cos(\theta)$ ，实际相电压 $U_{an}=\frac{2}{3}U_{dc}cos(\theta)$  或   $U_{an}=\frac{1}{3}U_{dc}cos(\theta)$  （未考虑方向）。
 
 **2.1.3 开关函数定义**
 
 定义开关函数Sx(x=a,b,c)为：
 
-$S_x=\begin{cases}
-1 \\
-0
-\end{cases}$ ，1上桥臂导通，0下桥臂导通。
+$$S_x=\begin{cases}
+1 \quad\quad1上桥臂导通\\
+0 \quad\quad0下桥臂导通
+\end{cases}$$ 
 
 ![20240124191604](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240124191604.png)
 
@@ -174,8 +178,11 @@ T_6=mT_ssin(\theta)
 用 $u_{\alpha}$ 和 $u_{\beta}$ 表示合成矢量在α和β轴上的分量，定义 $U_1$ ， $U_2$ ， $U_3$ 三个变量，令
 
 $$U_1=u_{\beta}$$
+
 $$U_2=\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_{\beta}$$
+
 $$U_3=-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta$$
+
 
 再定义3个变量A,B,C，通过分析可以得出：
 
