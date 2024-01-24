@@ -125,14 +125,18 @@ $$V_{out}(t)=a\exp\left( \frac{A_0-2}{2}w_0t \right)cos\left( \frac{A_0\sqrt{3}}
  $w_{out}=w_0+K_{VCO}V_{out}$ ，其中 $K_{VCO}$ 为  $VCO$  的增益，其单位为：  $rad/(s.v)$ 
 
 对于一个交流信号，气象为变化的速度即频率，因此
+
 $$w=\frac{d\phi}{dt}$$
 
 所以VCO输出信号的相位为
 
-$$\phi _{out}=\int w_{out}dt+\phi_0=w_0t+K_{VCO}\int V_{cont}dt+\phi_0$$
+$$\phi_{out}=\int w_{out}dt+\phi_0=w_0t+K_{VCO}\int V_{cont}dt+\phi_0$$
 
 在VCO中，我们最关心盈出相位
-$$\phi_{ex}=K_{VCO}\int V_{cont}dt \Rightarrow \phi _{ex}(s)=\frac{K_{VCO}}{s}V_{cont}(s)$$
+
+
+$$\phi_{ex}=K_{VCO}\int V_{cont}dt \Rightarrow \phi_{ex}(s)=\frac{K_{VCO}}{s}V_{cont}(s)$$
+
 
 因此，可以将VCO理解成输入为控制电压，输出为盈出相位的系统，因此该系统是一个理想的积分器，其传递函数为
 
