@@ -19,7 +19,11 @@ $$\begin{bmatrix}
 
 ![20240125195231](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240125195231.png)
 
-是否可以这样计算 $\theta$ 值  $-tan\theta_e=\frac{\hat{e}_\alpha}{\hat{e}_\beta},\theta_e=-arctan\frac{\hat{e}_\alpha}{\hat{e}_\beta}$  ?
+是否可以这样计算 $\theta$ 值  
+
+
+![image](https://github.com/xupengfeir/Notes-and-Articles/assets/154572489/8ebcbf30-7a40-4bd2-9d62-f5e92cbd6c2c)
+
 
 不可以。当  $\theta$ 处于 $\frac{\pi}{2}$ 附近时，正反切函数为无穷值，反正切函数不能很好地计算 $\theta$。（未经过闭环反馈，无法判断是否是准确值）。
 
