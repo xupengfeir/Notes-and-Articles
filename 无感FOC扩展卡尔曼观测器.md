@@ -8,12 +8,14 @@ $$Z_t=HX_t$$
 
 当T为1时离散化后：
 
-$$\hat{X}_k=A\hat{X}_{k-1}+Bu_{k-1}$$
+$$\hat{X} _k = A \hat{X} _{k-1} + B u _{k-1}$$
+
 $$Z_k=HX_k$$
 
 考虑系统噪声：
+ 
+$$\hat{X}  _k = A \hat{X} _{k-1} + B u _{k-1} + W_k$$
 
-$$\hat{X}_k=A\hat{X}_{k-1}+Bu_{k-1}+W_k$$
 $$Z_k=HX_k+V_k$$
 
 其中 $W_k$ 为过程噪音， $V_k$ 为测量噪音；
