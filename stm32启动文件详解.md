@@ -16,7 +16,7 @@
 ![v2-e13be5844f31ed6aa70ee5e64b6fe198_r](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/v2-e13be5844f31ed6aa70ee5e64b6fe198_r.jpg)
 
 **详解**  
-1、栈（Stack）  
+**1、栈（Stack）  **  
 在startup_stm32f429_439xx.s文件中，默认将栈大小设置成0x00000400（1KB），stm32F4xx芯片内部有192KB SRAM  ，因此栈最大可设置为192KB大小。   
 
 Stack_Mem为栈名，不初始化可读可写，8字节对齐。Stack_Size是栈的大小，__initial_sp表示结束地址（栈顶地址，栈是由高字节向低字节生长的）。
@@ -24,12 +24,12 @@ Stack_Mem为栈名，不初始化可读可写，8字节对齐。Stack_Size是栈
 栈的主要作用是用于局部变量、函数调用、函数形参的开销，大小应小于内部RAM大小，考虑到局部变量的需求，防止栈溢出。
 ![20240224161032](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240224161032.png)
 
-2、堆（Heap）  
+**2、堆（Heap）**  
 在栈的代码后面便是初始化堆的代码，其中堆的大小设置为0x00000200(512B)。  
 堆名为Heap_ Mem，不初始化，可读可写，8（23）字节对齐。Heap_Size为堆的大小，heap_base为堆的起始地址，heap_limit为堆的结束地址，因为堆是由低地址向高地址生长。堆的作用是用于malloc()函数申请的动态内存的分配。
 ![20240224161622](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240224161622.png)
 
-3、中断向量表  
+**3、中断向量表**  
 ![20240224162243](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240224162243.png)
 
 PRESERVE8： 指定当前文件的堆栈按照 8 字节对齐    
@@ -47,11 +47,11 @@ __Vectors是异常/中断向量表的起始位置，__Vectors_End是中断向量
 因此，程序编译时会优先将其他文件中的同名函数首地址放置到异常或中断向量表中对应中断服务函数的地址。
 ![20240224162829](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240224162829.png)
 
-4、复位中断服务程序    
-定义一个名为.text代码段，可读。
+**4、复位中断服务程序**    
+定义一个名为.text代码段，可读。   
 ![20240224163529](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240224163529.png)
 
-**复位中断服务程序是系统上电后第一个执行的程序，调用 **SystemInit**函数初始化系统时钟，然后调用C库函数_main,最终调用main函数进入C程序。**
+**复位中断服务程序是系统上电后第一个执行的程序，调用 **SystemInit**函数初始化系统时钟，然后调用C库函数_main,最终调用main函数进入C程序。**   
 ![20240224163647](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240224163647.png)
 
 LDR：从存储器加载字到一个寄存器。   
@@ -65,11 +65,11 @@ Systemlnit是一个标准的库函数，在system_stm32f4xx.c这个库文件中�
 
 main是一个标准的C库函数，主要作用是初始化用户堆栈，最终调用main函数进入C程序。在C应用程序中，必须有一个main函数。需要注意的是，_main不是用户C程序的main 函数。  
 
-5、异常和中断服务程序
+**5、异常和中断服务程序**  
 异常和中断服务程序（NMI_Handler）的地址存储在0x08000008地址处。  
 【0x08000000：存储异常/中断向量表地址；0x08000004：存储符复位中断服务程序地址】
 
-6、用户堆栈初始化  
+**6、用户堆栈初始化**  
 
 判断是否定义了__MICROLIB,如果定义了，则赋予标号__initial_sp(栈顶地址)、__heap_base(堆起始地址)、__heap_limit(堆结束地址)全局属性。可供外部文件调用。
 
