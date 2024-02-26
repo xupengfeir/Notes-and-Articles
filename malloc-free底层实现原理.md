@@ -75,7 +75,7 @@ struct mm_struct {
 ```malloc只知道stark_brk和brk之间连续可用的内存空间可以任意分配，如果不够用了就向系统申请增大brk。```
 
 ### 相关系统调用 
-**(1)brk()和sbrk()**
+**(1) brk()和sbrk()**
 
 由前文对进程地址空间结构的分析可知，要增加一个进程实际的可用堆大小，就需要将`break`指针向高地址移动。
 
@@ -96,7 +96,7 @@ void *sbrk(intptr_t increment);
 ```
 
 进程所面对的虚拟内存地址空间，只有按页映射到物理内存地址，才能真正使用。  
-受物理存储容量限制，整个堆虚拟内存空间不可能全部映射到实际的物理内存。因此每个进程有一个rlimit表示当前进程可用资源上限。这个限制可以通过getrlimit系统调用得到。
+受物理存储容量限制，整个堆虚拟内存空间不可能全部映射到实际的物理内存。因此每个进程有一个rlimit表示当前进程可用资源上限。这个限制可以通过getrlimit系统调用得到。  
 ![20240226144545](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240226144545.png)  
 其中rlimit是一个结构体：  
 ```
@@ -162,7 +162,7 @@ malloc的三种内存区：
 * 当chunk足够大，fast bin和bins都不能满足要求，甚至top chunk都不能满足时，malloc会从mmap来直接使用内存映射来将页映射到进程空间，这样的chunk释放时，直接解除映射，归还给操作系统。（极限大的时候）
 * Last remainder是另外一种特殊的chunk，就像top chunk和mmaped chunk一样，不会在任何bins中找到这种chunk。当需要分配一个small chunk,但在small bins中找不到合适的chunk，如果last remainder chunk的大小大于所需要的small chunk大小，last remainder chunk被分裂成两个chunk，其中一个chunk返回给用户，另一个chunk变成新的last remainder chunk。（这个应该是fast bins中也找不到合适的时候，用于极限小的）
 
-由之前的分析可知malloc利用chunk结构来管理内存块，malloc就是由不同大小的chunk链表组成。malloc会给  用户分配的空间的前后加上一些控制信息，用这样的方法来记录分配的信息，以便完成分配和释放工作。chunk指针指向chunk开始的地方，图中的mem指针才是真正返回给用户的内存指针。
+由之前的分析可知malloc利用chunk结构来管理内存块，malloc就是由不同大小的chunk链表组成。malloc会给  用户分配的空间的前后加上一些控制信息，用这样的方法来记录分配的信息，以便完成分配和释放工作。chunk指针指向chunk开始的地方，图中的mem指针才是真正返回给用户的内存指针。  
 ![20240226161541](https://gcore.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240226161541.png)
 
 * chunk 的第二个域的最低一位为P，它表示前一个块是否在使用中，P 为 0 则表示前一个 chunk 为空闲，这时chunk的第一个域 prev_size 才有效，prev_size 表示前一个 chunk 的 size，程序可以使用这个值来找到前一个 chunk 的开始地址。当 P 为 1 时，表示前一个 chunk 正在使用中，prev_size程序也就不可以得到前一个 chunk 的大小。不能对前一个 chunk 进行任何操作。malloc分配的第一个块总是将 P 设为 1，以防止程序引用到不存在的区域。
