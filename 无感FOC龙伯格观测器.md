@@ -240,7 +240,8 @@ $$A=\begin{bmatrix} -\frac{R}{L_s} & 0 & -\frac{1}{L_s}&0 \\
 0 & 0 & 0 & -w_e \\
 0 & 0 & w_e & 0 \end{bmatrix},B=\begin{bmatrix} \frac{1}{L_s} & 0 \\
 0 & \frac{1}{L_s} \\
-0 & 0 \\ 0 & 0 \end{bmatrix},C=\begin{bmatrix} 1 & 0& 0& 0 \\
+0 & 0 \\
+0 & 0 \end{bmatrix},C=\begin{bmatrix} 1 & 0& 0& 0 \\
 0 & 1 &0 &0 \end{bmatrix}$$
 
 判断系统是否稳定，可以从状态矩阵A的特征值入手,根据闭环状态观测器框图引入状态观测器，得
