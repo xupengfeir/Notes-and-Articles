@@ -8,7 +8,8 @@
 
 $$\begin{bmatrix}u_{\alpha } \\
 u_{\beta}\end{bmatrix}=\begin{bmatrix}R_s+L_s\frac{d}{dt}  & 0\\
-0 & R_s+L_s\frac{d}{dt}\end{bmatrix}+\begin{bmatrix}w_e\psi_f \end{bmatrix}\begin{bmatrix} -sin\theta \\
+0 & R_s+L_s\frac{d}{dt}\end{bmatrix}\begin{bmatrix}i_{\alpha} \\
+i_{\beta}\end{bmatrix}+\begin{bmatrix}w_e\psi_f \end{bmatrix}\begin{bmatrix} -sin\theta \\
 cos\theta\end{bmatrix}$$
 
 $$\frac{di_{\alpha}}{dt}=-\frac{-R_s}{L_s}i_{\alpha}+\frac{\omega_{e}\psi_f}{L_s}sin\theta-\frac{u_{\alpha}}{L_s}$$
