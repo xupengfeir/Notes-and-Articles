@@ -230,3 +230,55 @@ $$T_a=(T_s-T_4-T_6)/4,T_b=T_a+T_4/2,T_c=T_b+T_6/2$$
 则三相电压开关时间 $T_{cm1}$ ， $T_{cm2}$ ， $T_{cm3}$ 与各扇区关系：
 
 ![20240124200607](https://cdn.jsdelivr.net/gh/xupengfeir/Notes-and-Articles/Image/20240124200607.png)
+
+## 基于SPWM使用零序分量注入生成SVPWM波：
+
+```
+void SVPWMOut(float Ud,float Uq)
+{
+	//Park逆变换，得到alpha-beta电压
+	Ual = Ud*cos - Uq*sin;
+	Ube = Ud*sin + Uq*cos;
+	
+	//Clarke逆变换
+	float Ua = Ual;
+	float Ub = -0.5f * Ual + 0.8660254f * Ube;
+	float Uc = -0.5f * Ual - 0.8660254f * Ube;
+	
+	//求零序分量
+	SVMax = max(Ua,Ub,Uc);
+	SVMin = min(Ua,Ub,Uc);
+	Zero = (SVMax+SVMin)/2.0;
+	
+	//调制系数,因为三相电压注入零序电压分量后，其幅值会变为原来的sqrt(3)/2倍，为提高电压的利用率，可以乘上2/sqrt（3）
+	Ua=Ua*2/sqrt(3);
+	Ub=Ub*2/sqrt(3);
+	Uc=Uc*2/sqrt(3);
+	
+	//计算零序注入后的电压
+	Ua = Ua-Zero;
+	Ub = Ub-Zero;
+	Uc = Uc-Zero;
+	
+	//计算占空比，由于三相SPWM调制下，逆变器能输出的不失真最大相电压幅值是Udc/2，即三相输出电压Ua,Ub,Uc范围[-Udc/2,Udc/2],考虑占空比为[0,1]
+	DutyA = Ua/(Udc)+0.5;
+	DutyB = Ub/(Udc)+0.5;
+	DutyC = Uc/(Udc)+0.5;
+	
+	//限幅[0,1]
+	map_constraint(&DutyA);
+	map_constraint(&DutyB);
+	map_constraint(&DutyC);
+
+	// PWM输出,PWM_ARR是PWM定时器周期重装载值ARR
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, DutyA * PWM_ARR);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, DutyB * PWM_ARR);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, DutyC * PWM_ARR);
+}
+```
+
+
+
+
+
+
